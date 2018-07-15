@@ -1,0 +1,57 @@
+dbutils
+
+
+1) 查询结果处理器
+BeanHandler 、BeanListHandler、BeanMapHandler、ArrayHandler、ArrayListHandler
+都实现了ResultSetHandler<T>接口，对结果集的处理方式做了实现，开发人员也可以去自行去
+实现ResultSetHandler<T>接口，直接对某个特定的查询结果集进行实现.
+一般来说，通用的做法是，在sql语句中通过列的别名来和实体的字段一一对应起来，然后
+就可以直接使用dbutils框架提供的处理器，而不需再去重复实现了，这样每次查询的结果
+都通过列别名来实现了和实体相应字段的绑定.
+count统计方式，可以实现ResultSetHandler<Long>接口来定义统计结果的处理器.
+
+ArrayHandler: 将ResultSet中的第一行的数据转化成Object[].
+
+ArrayListHandler: 将ResultSet中所有行数据转化成List，List存放的是Object[].
+
+BeanHandler: 将ResultSet中第一行数据转化成指定的Bean.
+
+BeanMapHandler: 将ResultSet中第一行数据转成Map<String, Object>，key是列名，value是列的值
+
+BeanListHandler: 将ResultSet中所有行数据转化成List，List存放的是Bean.
+
+ColumnListHandler: 将ResultSet中某一列的数据转化成List，List存放的是Object.
+
+KeyedHandler: 将ResultSet转化成Map，key为某一列，value是一个Map<String, Object> 对应行数据.
+
+MapHandler: 将ResultSet中第一行转化成Map<String, Object> key是列名，value是列的值.
+
+MapListHandler: 将ResultSet中所有行转化成List，List存放的是Map<String, Object>
+
+ScalarHandler: 将ResultSet中一行中的某一列转化成Object.
+
+2) 行处理器 (row handler)
+
+
+
+3) CoreDao<T> 设计
+单个/批量增删改，查看/统计/搜索
+主要借助QueryRunner 配合相关的处理器来实现.
+数据库连接/事务/关闭 可以借助 DbUtils.
+或者DbUtilsHelper来获取连接/事务/关闭等.
+
+4) 枚举类型或复合等类型
+对于非基本常用的类型，用BeanHandler不能直接实现，可以实现一个ResultSetHandler接口，自定义结果集的处理逻辑.
+
+
+
+
+
+
+
+
+
+
+
+
+

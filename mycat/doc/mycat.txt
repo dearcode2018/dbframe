@@ -1,0 +1,26 @@
+mycat
+
+1.分布式数据库中间件
+
+windows版本
+1) 在bin目录下单击startup_nowrap.bat 即可启动mycat中间件.
+2) 在cmd中连接mycat mysql -uroot -p -P8066      (8066是mycat的默认的端口)
+输入密码然后就可以连接上mycat.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

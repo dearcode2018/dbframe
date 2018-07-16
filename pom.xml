@@ -16,7 +16,7 @@
 		<module>jdbc5</module>		
 		<module>mycat</module>		
 		<module>db-sharding</module>		
-		<module>jdbc-sharding</module>	
+		<module>sharding-jdbc</module>	
 		<module>read-write-seperate</module>		
 		<module>table-sharding</module>					
 		<!--

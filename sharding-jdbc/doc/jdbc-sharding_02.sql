@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS person;
 CREATE TABLE person (
 	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
 	name varchar(64) COMMENT '姓名',
+	user_id int(11) COMMENT '用户id',	
 	photoUrl varchar(255) COMMENT '证件照片url',
 	gender varchar(15) COMMENT '性别 : Unknow(未知), Male(男), Female-(女)',
 	nation varchar(32) COMMENT '民族',
@@ -52,30 +53,6 @@ VALUES ('沙尔塔', null, 'Female', '维吾尔族', '1976-09-08', '陕西省西
 INSERT INTO person (name, photoUrl, gender, nation, birthday, address, cardId) 
 VALUES ('郑飞', null, 'Male', '壮族', '1984-02-05', '四川省成都市天都区天府路463号', null);
 
-
-/* 创建表 */
-DROP TABLE IF EXISTS idCard;
-CREATE TABLE idCard (
-	`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-	title varchar(32) COMMENT '身份证标题, 例如 : 中华人民共和国 - 居民身份证',
-	cardId varchar(64) COMMENT '身份证号',
-	issuingAuthority varchar(32) COMMENT '签发机关 (Xx市公安局)',
-	effectiveDate datetime COMMENT '生效日期 yyyy-MM-dd',
-	expiryDate datetime COMMENT '失效日期 yyyy-MM-dd',
-	personId int(11) COMMENT '身份证持有者id',
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='身份证表';
-
-/* 添加约束 */
-ALTER TABLE person ADD CONSTRAINT fk_person_cardId FOREIGN KEY(cardId) REFERENCES idCard(id);
-/* 添加约束 */
-ALTER TABLE idCard ADD CONSTRAINT fk_idCard_personId FOREIGN KEY(personId) REFERENCES person(id);
-
-/* 删除表的时候，需要先手动删除约束，然后再创建删除表 */
-/* 删除约束 */
-ALTER TABLE person DROP FOREIGN KEY fk_person_cardId;
-/* 删除约束 */
-ALTER TABLE idCard DROP FOREIGN KEY fk_idCard_personId;
 
 
 

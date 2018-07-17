@@ -29,7 +29,8 @@
 		<mybatis.cache.version>1.0.0</mybatis.cache.version>
 		<mybatis.migrations.version>3.2.0</mybatis.migrations.version>		
 		<mybatis.spring.version>1.2.2</mybatis.spring.version>		
-		<sharding.jdbc.version>1.5.4.1</sharding.jdbc.version>	
+		<sharding.jdbc.version>1.5.4.1</sharding.jdbc.version>
+		<mysql.driver.version>8.0.11</mysql.driver.version>
 	</properties>
 
 	<dependencies>
@@ -155,6 +156,12 @@
 		</dependency>		
 	
 		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql.driver.version}</version>
+		</dependency>	
+	
+		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
@@ -201,6 +208,18 @@
 		    <artifactId>sharding-jdbc-core</artifactId>
 		    <version>${sharding.jdbc.version}</version>
 		</dependency>	
+		
+<!-- 		<dependency>
+		    <groupId>com.dangdang</groupId>
+		    <artifactId>sharding-jdbc-config-common</artifactId>
+		    <version>${sharding.jdbc.version}</version>
+		</dependency> -->
+
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>sharding-jdbc-config-spring</artifactId>
+            <version>${sharding.jdbc.version}</version>
+        </dependency>
 		
 	</dependencies>
 

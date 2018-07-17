@@ -9,10 +9,14 @@
 
 
 	
+	<!-- 事务管理器 -->
+	<bean id="transactionManager" 
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="shardingDataSource" />
+	</bean>
 
-
-
-
+	<!-- 启用事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
 

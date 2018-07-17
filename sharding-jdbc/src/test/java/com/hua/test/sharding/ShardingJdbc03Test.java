@@ -27,6 +27,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hua.test.BaseTest;
+import com.mysql.jdbc.Driver;
 
 
 /**
@@ -49,7 +50,10 @@ import com.hua.test.BaseTest;
  * 发生变化时，将此文件拷贝到conf/xml 目录下，所有的spring配置文件包括mvc部分，
  * 都在此处标示出来，才能正常启动mvc环境
  */
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"
+@ContextConfiguration(locations = {
+		"classpath:conf/xml/spring-sharding_03.xml",
+		"classpath:conf/xml/spring-mybatis.xml",
+		"classpath:conf/xml/spring-tx.xml"
 })
 public final class ShardingJdbc03Test extends BaseTest {
 
@@ -62,6 +66,22 @@ public final class ShardingJdbc03Test extends BaseTest {
 	 * 将目标项目的配置复制到当前项目同一路径下
 	 * 
 	 */
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testShardingDatabaseTable() {
+		try {
+			//Driver//
+			//TableRule r = null;
+		} catch (Exception e) {
+			log.error("testShardingDatabaseTable =====> ", e);
+		}
+	}
 	
 	/**
 	 * 

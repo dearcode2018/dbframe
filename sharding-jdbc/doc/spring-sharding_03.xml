@@ -78,17 +78,91 @@
 		<property name="testConnectionOnCheckout" value="${db.jdbc.c3p0.testConnectionOnCheckout}" />
 	</bean>
 
-	<!-- ================= Person 分库分表策略 ==================  -->
-	<rdb:strategy id="personDatabaseShardingStrategy" sharding-columns="user_id"  algorithm-class="com.hua.sharding.PersonSingleKeyDatabaseShardingAlgorithm" />
-	<rdb:strategy id="personTableShardingStrategy" sharding-columns="user_id" algorithm-class="com.hua.sharding.PersonSingleKeyTableShardingAlgorithm" />
+	<!-- ================== 数据源路由 =================  -->
+	<bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
+		<constructor-arg>
+			<!-- 数据源-映射 -->
+			<map>
+				<entry key="sharding_01"  value-ref="dataSource_01" />
+				<entry key="sharding_02"  value-ref="dataSource_02" />
+				<entry key="sharding_03"  value-ref="dataSource_03" />
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<!-- ================= Person 路由配置 ==================  -->
+	<!-- 分库策略 -->
+	<bean id="personDatabaseShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
+		<constructor-arg index="0" value="user_id" />
+		<constructor-arg index="1">
+			<bean class="com.hua.sharding.PersonSingleKeyDatabaseShardingAlgorithm" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- 分表策略 -->
+	<bean id="personTableShardingStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
+		<constructor-arg index="0" value="user_id" />
+		<constructor-arg index="1">
+			<bean class="com.hua.sharding.PersonSingleKeyTableShardingAlgorithm" />
+		</constructor-arg>
+	</bean>
+	
+	<!-- 表路由 -->
+	<bean id="personTableRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
+	<!-- 表名前缀 -->
+		<constructor-arg index="0" value="person" />
+		<constructor-arg index="1">
+			<!-- 分表-所有的表 -->
+			<list>
+				<value>person_01</value>
+				<value>person_02</value>
+				<value>person_03</value>
+				<value>person_04</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg index="2" ref="dataSourceRule" />
+		<constructor-arg index="3" ref="personDatabaseShardingStrategy" />
+		<constructor-arg index="4" ref="personTableShardingStrategy" />	
+		<property name=""></property>			
+	</bean>		
+	
+	<!-- ================= 分库分表规则 ==================  -->	
+	<bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
+		<!-- 数据源路由规则 -->
+		<constructor-arg index="0" ref="dataSourceRule" />
+		<constructor-arg index="1">
+			<!-- 表路由规则集合 -->
+			<list>
+				<ref bean="personTableRule"/>
+			</list>
+		</constructor-arg>
+	</bean>
 	
 	<!-- ================ 逻辑数据源 ===================  -->
+	<bean id="shardingDataSource" class="com.dangdang.ddframe.rdb.sharding.jdbc.core.datasource.ShardingDataSource">
+		<constructor-arg ref="shardingRule" />
+	</bean>
+
+
+
+
+
+
+
+
+
+
+
+	
+	<rdb:strategy sharding-columns="user_id" id="personDatabaseShardingStrategy" algorithm-class="com.hua.sharding.PersonSingleKeyDatabaseShardingAlgorithm" />
+	<rdb:strategy sharding-columns="user_id" id="personTableShardingStrategy" algorithm-class="com.hua.sharding.PersonSingleKeyTableShardingAlgorithm" />
+	
 	<rdb:data-source id="shardingDataSource">
 		<!-- 多个数据源用逗号隔开 -->
 		<rdb:sharding-rule data-sources="dataSource_01,dataSource_02,dataSource_03">
 			<rdb:table-rules>
 				<!-- 一个分表对应一项 -->
-				<rdb:table-rule logic-table="person" actual-tables="person_"
+				<rdb:table-rule logic-table="person" actual-tables="person_${0}${[..,4]}"
 					data-source-names="personDatabaseShardingStrategy"
 					table-strategy="personTableShardingStrategy" />
 					

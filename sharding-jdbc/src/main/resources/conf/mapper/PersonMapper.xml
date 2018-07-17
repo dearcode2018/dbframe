@@ -20,8 +20,9 @@
 
 	<!-- 插入单个对象 -->
 	<insert id="insert" parameterType="person">
-		INSERT INTO person (id, name, photoUrl, gender, nation, birthday, address) 
+		INSERT INTO person (id, name, user_id, photoUrl, gender, nation, birthday, address) 
 		VALUES (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, 
+		#{userId, jdbcType=DECIMAL}, 		
 		#{photoUrl, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, 
 		#{nation, jdbcType=VARCHAR}, #{birthday, jdbcType=DATE}, 
 		#{address, jdbcType=VARCHAR})

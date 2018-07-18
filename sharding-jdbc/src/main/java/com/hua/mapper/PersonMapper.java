@@ -45,6 +45,15 @@ public interface PersonMapper extends CoreMapper<String, Person>
 	
 	/**
 	 * 
+	 * @description 
+	 * @param oids
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public Long arrayForeachUserId(final Integer[] oids);
+	
+	/**
+	 * 
 	 * 描述: list foreach (collection = list)
 	 * @author qye.zheng
 	 * @param oids
@@ -143,6 +152,14 @@ public interface PersonMapper extends CoreMapper<String, Person>
 	 */
 	public void dmlInsertSelectKey(final Person person);
 	
-	
+	/**
+	 * 
+	 * @description 
+	 * @param startValue
+	 * @param endValue
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public Long countBetween(final @Param("startValue") Integer startValue, final @Param("endValue") Integer endValue);
 	
 }

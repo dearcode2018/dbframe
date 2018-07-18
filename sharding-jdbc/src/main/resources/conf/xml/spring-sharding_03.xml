@@ -24,58 +24,37 @@
 	</bean>
 
 	<!-- ================= 物理数据源 ==================  -->	
-	<bean id="dataSource_01" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${db.jdbc.c3p0.driverClass}" />
-		<property name="jdbcUrl" value="${db_01.jdbc.c3p0.jdbcUrl}" />
-		<property name="user" value="${db.jdbc.c3p0.user}" />
-		<property name="password" value="${db.jdbc.c3p0.password}" />
-		<property name="maxPoolSize" value="${db.jdbc.c3p0.maxPoolSize}" />
-		<property name="minPoolSize" value="${db.jdbc.c3p0.minPoolSize}" />
-		<property name="initialPoolSize" value="${db.jdbc.c3p0.initialPoolSize}" />
-		<property name="acquireIncrement" value="${db.jdbc.c3p0.acquireIncrement}" />
-		<property name="checkoutTimeout" value="${db.jdbc.c3p0.checkoutTimeout}" />
-		<property name="maxIdleTime" value="${db.jdbc.c3p0.maxIdleTime}" />
-		<property name="idleConnectionTestPeriod" value="${db.jdbc.c3p0.idleConnectionTestPeriod}" />
-		<property name="acquireRetryAttempts" value="${db.jdbc.c3p0.acquireRetryAttempts}" />
-		<property name="breakAfterAcquireFailure" value="${db.jdbc.c3p0.breakAfterAcquireFailure}" />
-		<property name="testConnectionOnCheckout" value="${db.jdbc.c3p0.testConnectionOnCheckout}" />
+	<bean id="dataSource_01" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.jdbc.dbcp2.driverClass}" />
+		<property name="url" value="${db_01.jdbc.dbcp2.jdbcUrl}" />
+		<property name="username" value="${db.jdbc.dbcp2.user}" />
+		<property name="password" value="${db.jdbc.dbcp2.password}" />
+		<property name="maxIdle" value="${db.jdbc.dbcp2.maxIdle}" />
+		<property name="initialSize" value="${db.jdbc.dbcp2.initialPoolSize}" />
+		<property name="maxWaitMillis" value="${db.jdbc.dbcp2.maxWaitMillis}" />		
+		<property name="validationQuery" value="${db.jdbc.dbcp2.validationQuery}" />
 	</bean>
 
-	<bean id="dataSource_02" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${db.jdbc.c3p0.driverClass}" />
-		<property name="jdbcUrl" value="${db_02.jdbc.c3p0.jdbcUrl}" />
-		<property name="user" value="${db.jdbc.c3p0.user}" />
-		<property name="password" value="${db.jdbc.c3p0.password}" />
-		<property name="maxPoolSize" value="${db.jdbc.c3p0.maxPoolSize}" />
-		<property name="minPoolSize" value="${db.jdbc.c3p0.minPoolSize}" />
-		<property name="initialPoolSize" value="${db.jdbc.c3p0.initialPoolSize}" />
-		<property name="acquireIncrement" value="${db.jdbc.c3p0.acquireIncrement}" />
-		<property name="checkoutTimeout" value="${db.jdbc.c3p0.checkoutTimeout}" />
-		<property name="maxIdleTime" value="${db.jdbc.c3p0.maxIdleTime}" />
-		<property name="idleConnectionTestPeriod" value="${db.jdbc.c3p0.idleConnectionTestPeriod}" />
-		<property name="acquireRetryAttempts" value="${db.jdbc.c3p0.acquireRetryAttempts}" />
-		<property name="breakAfterAcquireFailure" value="${db.jdbc.c3p0.breakAfterAcquireFailure}" />
-		<property name="testConnectionOnCheckout" value="${db.jdbc.c3p0.testConnectionOnCheckout}" />
+	<bean id="dataSource_02" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.jdbc.dbcp2.driverClass}" />
+		<property name="url" value="${db_02.jdbc.dbcp2.jdbcUrl}" />
+		<property name="username" value="${db.jdbc.dbcp2.user}" />
+		<property name="password" value="${db.jdbc.dbcp2.password}" />
+		<property name="maxIdle" value="${db.jdbc.dbcp2.maxIdle}" />
+		<property name="initialSize" value="${db.jdbc.dbcp2.initialPoolSize}" />
+		<property name="maxWaitMillis" value="${db.jdbc.dbcp2.maxWaitMillis}" />		
+		<property name="validationQuery" value="${db.jdbc.dbcp2.validationQuery}" />
 	</bean>
 
-	<bean id="dataSource_03" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${db.jdbc.c3p0.driverClass}" />
-		<property name="jdbcUrl" value="${db_03.jdbc.c3p0.jdbcUrl}" />
-		<property name="user" value="${db.jdbc.c3p0.user}" />
-		<property name="password" value="${db.jdbc.c3p0.password}" />
-		<property name="maxPoolSize" value="${db.jdbc.c3p0.maxPoolSize}" />
-		<property name="minPoolSize" value="${db.jdbc.c3p0.minPoolSize}" />
-		<property name="initialPoolSize" value="${db.jdbc.c3p0.initialPoolSize}" />
-		<property name="acquireIncrement" value="${db.jdbc.c3p0.acquireIncrement}" />
-		<property name="checkoutTimeout" value="${db.jdbc.c3p0.checkoutTimeout}" />
-		<property name="maxIdleTime" value="${db.jdbc.c3p0.maxIdleTime}" />
-		<property name="idleConnectionTestPeriod" value="${db.jdbc.c3p0.idleConnectionTestPeriod}" />
-		<property name="acquireRetryAttempts" value="${db.jdbc.c3p0.acquireRetryAttempts}" />
-		<property name="breakAfterAcquireFailure" value="${db.jdbc.c3p0.breakAfterAcquireFailure}" />
-		<property name="testConnectionOnCheckout" value="${db.jdbc.c3p0.testConnectionOnCheckout}" />
+	<bean id="dataSource_03" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.jdbc.dbcp2.driverClass}" />
+		<property name="url" value="${db_03.jdbc.dbcp2.jdbcUrl}" />
+		<property name="username" value="${db.jdbc.dbcp2.user}" />
+		<property name="password" value="${db.jdbc.dbcp2.password}" />
+		<property name="maxIdle" value="${db.jdbc.dbcp2.maxIdle}" />
+		<property name="initialSize" value="${db.jdbc.dbcp2.initialPoolSize}" />
+		<property name="maxWaitMillis" value="${db.jdbc.dbcp2.maxWaitMillis}" />		
+		<property name="validationQuery" value="${db.jdbc.dbcp2.validationQuery}" />
 	</bean>
 
 	<!-- ================= Person 分库分表策略 ==================  -->
@@ -88,15 +67,13 @@
 		<rdb:sharding-rule data-sources="dataSource_01,dataSource_02,dataSource_03">
 			<rdb:table-rules>
 				<!-- 一个分表对应一项 -->
-				<rdb:table-rule logic-table="person" actual-tables="person_"
-					data-source-names="personDatabaseShardingStrategy"
+				<rdb:table-rule logic-table="person" actual-tables="person_01, person_02, person_03, person_04"
+					database-strategy="personDatabaseShardingStrategy"
 					table-strategy="personTableShardingStrategy" />
 					
 			</rdb:table-rules>
 		</rdb:sharding-rule>
 	</rdb:data-source>
-
-
 
 
 

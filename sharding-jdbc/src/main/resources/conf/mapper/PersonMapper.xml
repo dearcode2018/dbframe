@@ -9,7 +9,6 @@
 		<id property="id" javaType="string" column="id" jdbcType="VARCHAR" />
 		<result property="name" javaType="string" column="name" jdbcType="VARCHAR" />
 		<result property="photoUrl" javaType="string" column="photoUrl" jdbcType="VARCHAR" />
-		<result property="gender" javaType="string" column="gender" jdbcType="VARCHAR" />
 		<result property="nation" javaType="string" column="nation" jdbcType="VARCHAR" />
 		<result property="birthday" javaType="date" column="birthday" jdbcType="DATE" />
 		<result property="address" javaType="string" column="address" jdbcType="VARCHAR" />
@@ -20,10 +19,10 @@
 
 	<!-- 插入单个对象 -->
 	<insert id="insert" parameterType="person">
-		INSERT INTO person (id, name, user_id, photoUrl, gender, nation, birthday, address) 
+		INSERT INTO person (id, name, user_id, photoUrl, nation, birthday, address) 
 		VALUES (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, 
 		#{userId, jdbcType=DECIMAL}, 		
-		#{photoUrl, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, 
+		#{photoUrl, jdbcType=VARCHAR},
 		#{nation, jdbcType=VARCHAR}, #{birthday, jdbcType=DATE}, 
 		#{address, jdbcType=VARCHAR})
 	</insert>
@@ -42,7 +41,6 @@
 		<set>
 			<if test="null != name and '' != name"> a.name = #{name, jdbcType=VARCHAR}, </if>
 			<if test="null != photoUrl and '' != photoUrl"> a.photoUrl = #{photoUrl, jdbcType=VARCHAR}, </if>
-			<if test="null != gender and '' != gender"> a.gender = #{gender, jdbcType=VARCHAR}, </if>
 			<if test="null != nation and '' != nation"> a.nation = #{nation, jdbcType=VARCHAR}, </if>
 			<if test="null != birthday"> a.birthday = #{birthday, jdbcType=DATE}, </if>
 			<if test="null != address and '' != address"> a.address = #{address, jdbcType=VARCHAR} </if>
@@ -64,9 +62,9 @@
 			SELECT count(*) afterCount FROM person
 		</selectKey> -->	
 		
-		INSERT INTO person (id, name, photoUrl, gender, nation, birthday, address) 
+		INSERT INTO person (id, name, photoUrl, nation, birthday, address) 
 		VALUES (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, 
-		#{photoUrl, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, 
+		#{photoUrl, jdbcType=VARCHAR},
 		#{nation, jdbcType=VARCHAR}, #{birthday, jdbcType=DATE}, 
 		#{address, jdbcType=VARCHAR})		
 	</insert>
@@ -83,7 +81,6 @@
 	<sql id="searchCondition">
 		<if test="null != entity">
 			<if test="null != entity.name and '' != entity.name"> AND a.name LIKE ('%' ||  #{entity.name} || '%') </if>
-			<if test="null != entity.gender and '' != entity.gender"> AND a.gender = #{entity.gender} </if>
 			<if test="null != entity.nation and '' != entity.nation"> AND a.nation LIKE ('%' || #{entity.nation} || '%') </if>
 			<if test="null != entity.startBirthday"> AND a.birthday <![CDATA[ >= ]]> #{entity.startBirthday, jdbcType=DATE} </if>
 			<if test="null != entity.endBirthday"> AND a.birthday <![CDATA[ <= ]]> #{entity.endBirthday, jdbcType=DATE} </if>
@@ -114,13 +111,27 @@
 	</select>	
 	
 	<!-- array foreach (collection = array) -->
-	<select id="arrayForeach" resultType="string">
+	<select id="arrayForeach" resultType="java.lang.Long">
 		SELECT count(*) FROM person a
 		WHERE a.id IN
 		<foreach collection="array" open="(" item="item" index="index" separator="," close=")">
 			#{item}
 		</foreach>
 	</select>
+	
+	<select id="arrayForeachUserId" resultType="java.lang.Long">
+		SELECT count(*) FROM person a
+		WHERE a.user_id IN
+		<foreach collection="array" open="(" item="item" index="index" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>	
+	
+	<select id="countBetween" resultType="java.lang.Long">
+		SELECT count(*) FROM person a
+		WHERE a.user_id between #{startValue} AND #{endValue}
+	</select>		
+	
 		
 	<!-- list foreach (collection = list) -->
 	<select id="listForeach" resultType="string">
@@ -181,16 +192,9 @@
 			<when test="null != name and '' != name">
 				AND a.name LIKE ( '%' || #{name} || '%')
 			</when>
-			<when test="null != gender and '' != gender">
-				AND a.gender = #{gender}
-			</when>
 			<when test="null != nation and '' != nation">
 				AND a.nation = #{nation}
 			</when>
-			<!-- 当上面所有条件都不满足时匹配 -->
-			<otherwise>
-				AND a.gender IN ('Male', 'Female')
-			</otherwise>
 		</choose>	
 	</select>	
 	
@@ -201,9 +205,6 @@
 			<if test="null != name and '' != name">
 				a.name LIKE ( '%' || #{name} || '%')
 			</if>		
-			<if test="null != gender and '' != gender">
-				AND a.gender = #{gender}
-			</if>
 			<if test="null != nation and '' != nation">
 				AND a.nation = #{nation}
 			</if>							
@@ -217,9 +218,6 @@
 			<if test="null != name and '' != name">
 				a.name LIKE ( '%' || #{name} || '%')
 			</if>		
-			<if test="null != gender and '' != gender">
-				AND a.gender = #{gender}
-			</if>
 			<if test="null != nation and '' != nation">
 				AND a.nation = #{nation}
 			</if>							

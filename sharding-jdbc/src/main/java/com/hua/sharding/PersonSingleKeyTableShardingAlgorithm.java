@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import com.dangdang.ddframe.rdb.sharding.api.ShardingValue;
 import com.dangdang.ddframe.rdb.sharding.api.strategy.table.SingleKeyTableShardingAlgorithm;
 import com.google.common.collect.Range;
+import com.hua.util.StringUtil;
 
  /**
  * @type PersonSingleKeyTableShardingAlgorithm
@@ -25,6 +26,12 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 	/* 分表的数量 */
 	private Integer SIZE = 4;
 	
+	/* 从多少开始，一般从0或1开始 */
+	private static final Integer START = 1;
+	
+	/* 后缀长度，例如 xx_01 后缀长度为2 */
+	private static final Integer SUFFIX_LENGTH = 2;
+	
 	/**
 	 * @description sql关键字中匹配符为 = 时表的映射
 	 * @param availableTargetNames
@@ -36,10 +43,18 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 	public String doEqualSharding(Collection<String> availableTargetNames,
 			ShardingValue<Integer> shardingValue)
 	{
+		
+		/*
+		 * 遍历数据源名称，返回后缀符合条件的数据表名称
+		 */
+		// 后缀
+		String suffix = null;
 		for (String tableName : availableTargetNames)
 		{
-			if (tableName.endsWith("0".concat(String.valueOf(shardingValue.getValue() % SIZE))))
+			suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + shardingValue.getValue() % SIZE);
+			if (tableName.endsWith(suffix))
 			{
+				System.out.println("doEqualSharding.dataSouceName = " + tableName);
 				
 				return tableName;
 			}
@@ -60,12 +75,18 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 			Collection<String> availableTargetNames,
 			ShardingValue<Integer> shardingValue)
 	{
+		/*
+		 * 遍历数据源名称，返回后缀符合条件的数据表名称
+		 */
+		// 后缀
+		String suffix = null;
 		final Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
 		for (Integer value : shardingValue.getValues())
 		{
+			suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + value % SIZE);
 			for (String tableName : availableTargetNames)
 			{
-				if (tableName.endsWith("0".concat(String.valueOf(value % SIZE))))
+				if (tableName.endsWith(suffix))
 				{
 					result.add(tableName);
 				}
@@ -87,13 +108,19 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 			Collection<String> availableTargetNames,
 			ShardingValue<Integer> shardingValue)
 	{
+		/*
+		 * 遍历数据源名称，返回后缀符合条件的数据表名称
+		 */
+		// 后缀
+		String suffix = null;
 		final Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
 		final Range<Integer> range =  shardingValue.getValueRange();
 		for (Integer i = range.lowerEndpoint(); i <= range.upperEndpoint(); i++)
 		{
 			for (String tableName : availableTargetNames)
 			{
-				if (tableName.endsWith("0".concat(String.valueOf(i % SIZE))))
+				suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + i % SIZE);
+				if (tableName.endsWith(suffix))
 				{
 					result.add(tableName);
 				}

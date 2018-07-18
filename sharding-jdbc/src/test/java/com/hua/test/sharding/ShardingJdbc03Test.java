@@ -20,14 +20,17 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import javax.annotation.Resource;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.hua.entity.Person;
+import com.hua.service.PersonService;
 import com.hua.test.BaseTest;
-import com.mysql.jdbc.Driver;
 
 
 /**
@@ -67,6 +70,9 @@ public final class ShardingJdbc03Test extends BaseTest {
 	 * 
 	 */
 	
+	@Resource
+	private PersonService personService;
+	
 	/**
 	 * 
 	 * 描述: 
@@ -76,6 +82,14 @@ public final class ShardingJdbc03Test extends BaseTest {
 	@Test
 	public void testShardingDatabaseTable() {
 		try {
+			
+			Person person = new Person();
+			person.setUserId(7);
+			person.setName("hahha");
+			person.setAddress("广东广州市");
+			
+			personService.insert(person);
+			
 			//Driver//
 			//TableRule r = null;
 		} catch (Exception e) {
@@ -90,12 +104,51 @@ public final class ShardingJdbc03Test extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void testSpringJunit() {
+	public void testArrayForeach() {
 		try {
+			Long[] ids = {12L};
+			Long count = personService.arrayForeach(ids);
 			
+			log.info("testArrayForeach =====> count = " + count);
 			
 		} catch (Exception e) {
-			log.error("testSpringJunit =====> ", e);
+			log.error("testArrayForeach =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testArrayForeach2() {
+		try {
+			Integer[] ids = {7, 5};
+			Long count = personService.arrayForeachUserId(ids);
+			log.info("testArrayForeach2 =====> count = " + count);
+			
+		} catch (Exception e) {
+			log.error("testArrayForeach2 =====> ", e);
+		}
+	}
+	
+	/**
+	 * 
+	 * 描述: 
+	 * @author qye.zheng
+	 * 
+	 */
+	@Test
+	public void testCountBetween() {
+		try {
+			Long count = personService.countBetween(2, 3);
+			
+			log.info("testCountBetween =====> count = " + count);
+			
+		} catch (Exception e) {
+			log.error("testCountBetween =====> ", e);
 		}
 	}
 	

@@ -39,15 +39,46 @@ public class PersonService
 		personMapper.insert(person);
 	}
 	
+	/**
+	 * 
+	 * @description 
+	 * @param ids
+	 * @author qianye.zheng
+	 */
+	public Long arrayForeach(Long[] ids)
+	{
+		Long count = personMapper.arrayForeach(ids);
+		
+		return count;
+	}
 	
 	
+	/**
+	 * 
+	 * @description 
+	 * @param ids
+	 * @author qianye.zheng
+	 */
+	public Long arrayForeachUserId(Integer[] ids)
+	{
+		Long count = personMapper.arrayForeachUserId(ids);
+		
+		return count;
+	}
 	
 	
-	
-	
-	
-	
-	
+	/**
+	 * 
+	 * @description 
+	 * @param startValue
+	 * @param endValue
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public Long countBetween(final Integer startValue, final Integer endValue)
+	{
+		return personMapper.countBetween(startValue, endValue);
+	}
 	
 	
 	

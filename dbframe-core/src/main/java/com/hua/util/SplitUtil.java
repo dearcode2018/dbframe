@@ -107,7 +107,7 @@ public final class SplitUtil
 		String result = null;
 		if (addPrefixZero)
 		{ // 需要补 0 
-			result = StringUtil.addPrefixZero(bitCount, num);
+			result = StringUtil.addZero(bitCount, num);
 		} else
 		{
 			result = String.valueOf(num);

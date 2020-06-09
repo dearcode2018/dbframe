@@ -20,7 +20,30 @@ public final class PagerEntity {
 	private long endIndex;
 	
 	/* 搜索条件对象 */
-	private Object entity;
+	private Object searchBean;
+
+	/**
+	 * @description 构造方法
+	 * @author qye.zheng
+	 */
+	public PagerEntity() {
+	}
+	
+	/**
+	 * 
+	 * @description 构造方法
+	 * @param startIndex
+	 * @param endIndex
+	 * @param searchBean
+	 * @author qye.zheng
+	 */
+	public PagerEntity(Object searchBean, long startIndex, long endIndex) {
+		super();
+		this.startIndex = startIndex;
+		this.endIndex = endIndex;
+		this.searchBean = searchBean;
+	}
+
 
 	/**
 	 * @return the startIndex
@@ -51,17 +74,19 @@ public final class PagerEntity {
 	}
 
 	/**
-	 * @return the entity
+	 * @return the searchBean
 	 */
-	public Object getEntity() {
-		return entity;
+	public Object getSearchBean()
+	{
+		return searchBean;
 	}
 
 	/**
-	 * @param entity the entity to set
+	 * @param searchBean the searchBean to set
 	 */
-	public void setEntity(Object entity) {
-		this.entity = entity;
+	public void setSearchBean(Object searchBean)
+	{
+		this.searchBean = searchBean;
 	}
-	
+
 }

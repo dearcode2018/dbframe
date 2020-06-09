@@ -50,7 +50,7 @@ public class PersonSingleKeyDatabaseShardingAlgorithm implements
 		String suffix = null;
 		for (String dataSouceName : availableTargetNames)
 		{
-			suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + shardingValue.getValue() % SIZE);
+			suffix = StringUtil.addZero(SUFFIX_LENGTH, START + shardingValue.getValue() % SIZE);
 			if (dataSouceName.endsWith(suffix))
 			{
 				System.out.println("doEqualSharding.dataSouceName = " + dataSouceName);
@@ -84,7 +84,7 @@ public class PersonSingleKeyDatabaseShardingAlgorithm implements
 		{
 			for (String dataSouceName : availableTargetNames)
 			{
-				suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + value % SIZE);
+				suffix = StringUtil.addZero(SUFFIX_LENGTH, START + value % SIZE);
 				if (dataSouceName.endsWith(suffix))
 				{
 					result.add(dataSouceName);
@@ -118,7 +118,7 @@ public class PersonSingleKeyDatabaseShardingAlgorithm implements
 		{
 			for (String dataSouceName : availableTargetNames)
 			{
-				suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + i % SIZE);
+				suffix = StringUtil.addZero(SUFFIX_LENGTH, START + i % SIZE);
 				if (dataSouceName.endsWith(suffix))
 				{
 					result.add(dataSouceName);

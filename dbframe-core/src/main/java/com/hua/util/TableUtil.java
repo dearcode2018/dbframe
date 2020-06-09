@@ -64,7 +64,7 @@ public final class TableUtil
 			{
 				resultBuilder.append("\n");
 				// 替换所有
-				resultBuilder.append(input.replace(REPLACE_SYMBOL,  StringUtil.addPrefixZero(bitCount, i)));
+				resultBuilder.append(input.replace(REPLACE_SYMBOL,  StringUtil.addZero(bitCount, i)));
 			}
 		} else
 		{ // 无需 补 0，自然增长
@@ -98,7 +98,7 @@ public final class TableUtil
 			final Integer bitCount = String.valueOf(amount).length();
 			for (int i = startIndex; i < endIndex; i++)
 			{
-				resultBuilder.append("select count(*) as cnt from " + tbPrefix + StringUtil.addPrefixZero(bitCount, i) + " \nunion ALL\n");
+				resultBuilder.append("select count(*) as cnt from " + tbPrefix + StringUtil.addZero(bitCount, i) + " \nunion ALL\n");
 			}
 			// 追加最后一个
 			resultBuilder.append("select count(*) as cnt from " + tbPrefix + endIndex + ") t;");
@@ -135,7 +135,7 @@ public final class TableUtil
 	 */
 	private static final void output(final String value)
 	{
-		FileUtil.writeString(OUTPUT_PATH, value);
+		FileUtil.writeString(OUTPUT_PATH, value, false);
 	}
 	
 }

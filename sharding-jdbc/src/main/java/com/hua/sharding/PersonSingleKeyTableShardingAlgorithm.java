@@ -51,7 +51,7 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 		String suffix = null;
 		for (String tableName : availableTargetNames)
 		{
-			suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + shardingValue.getValue() % SIZE);
+			suffix = StringUtil.addZero(SUFFIX_LENGTH, START + shardingValue.getValue() % SIZE);
 			if (tableName.endsWith(suffix))
 			{
 				System.out.println("doEqualSharding.dataSouceName = " + tableName);
@@ -83,7 +83,7 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 		final Collection<String> result = new LinkedHashSet<String>(availableTargetNames.size());
 		for (Integer value : shardingValue.getValues())
 		{
-			suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + value % SIZE);
+			suffix = StringUtil.addZero(SUFFIX_LENGTH, START + value % SIZE);
 			for (String tableName : availableTargetNames)
 			{
 				if (tableName.endsWith(suffix))
@@ -119,7 +119,7 @@ public class PersonSingleKeyTableShardingAlgorithm implements
 		{
 			for (String tableName : availableTargetNames)
 			{
-				suffix = StringUtil.addPrefixZero(SUFFIX_LENGTH, START + i % SIZE);
+				suffix = StringUtil.addZero(SUFFIX_LENGTH, START + i % SIZE);
 				if (tableName.endsWith(suffix))
 				{
 					result.add(tableName);

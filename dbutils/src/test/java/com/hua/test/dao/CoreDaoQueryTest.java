@@ -205,7 +205,7 @@ public final class CoreDaoQueryTest extends BaseTest {
 	public void testLike() {
 		try {
 			
-			listParams.add(SqlUtil.likeQuery("广东省", false, true));
+			listParams.add(SqlUtil.likeQuery("广东省"));
 			
 			sql = "SELECT a.oid, a.name, a.photoUrl, a.gender, a.nation, a.birthday, a.address FROM person a WHERE a.address LIKE ?";
 			

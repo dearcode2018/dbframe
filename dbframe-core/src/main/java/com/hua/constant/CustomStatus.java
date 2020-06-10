@@ -5,7 +5,7 @@
  * 
  *  version 1.0
  */
-package com.hua.constant.ext;
+package com.hua.constant;
 
 /**
  * 描述: 客户状态

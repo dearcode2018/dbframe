@@ -10,20 +10,28 @@
 	<artifactId>jdbc</artifactId>
 	<packaging>jar</packaging>
 	<name>jdbc</name>
+	
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<dbframe.core.version>0.0.1</dbframe.core.version>
-		<orm.version>0.0.1</orm.version>
+
 	</properties>
 
 	<dependencies>
+		
+		<!-- 为了验证 DriverManager自动尝试所有驱动的情况，有意将该驱动放在其他驱动的前面,
+		DriverManager将首先加载SQLServer驱动 -->
+        <!-- sql server jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>${jdbc.sqlserver.version}</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>com.hua</groupId>
 			<artifactId>dbframe-core</artifactId>
 			<version>${dbframe.core.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>

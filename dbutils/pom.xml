@@ -24,12 +24,6 @@
 			<artifactId>dbframe-core</artifactId>
 			<version>${dbframe.core.version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.hua</groupId>
-			<artifactId>orm</artifactId>
-			<version>${orm.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>commons-dbutils</groupId>

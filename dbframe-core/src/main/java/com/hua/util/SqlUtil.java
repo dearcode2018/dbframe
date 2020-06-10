@@ -42,7 +42,7 @@ public final class SqlUtil
 	 * @param content
 	 * @return
 	 */
-	public static String likeQuery(String content)
+	public static final String likeQuery(String content)
 	{
 		// 单引号
 		/*
@@ -51,17 +51,63 @@ public final class SqlUtil
 
 		if (content.contains("_"))
 		{
-			content = content.replace("_", "/_");
+			content = content.replace("_", "\\_");
 		}
 
 		if (content.contains("%"))
 		{
-			content = content.replace("%", "/%");
+			content = content.replace("%", "\\%");
+		}
+		
+		if (content.contains("?"))
+		{
+			content = content.replace("?", "\\?");
+		}
+		// 单引号
+		if (content.contains("'"))
+		{
+			content = content.replace("'", "\'");
 		}
 
 		return content;
 	}
-
+	
+	/**
+	 * 
+	 * @description 全模糊匹配
+	 * @param value
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public static final String bothLike(final String value)
+	{
+		return "%" + likeQuery(value) + "%";
+	}
+	
+	/**
+	 * 
+	 * @description 前缀模糊匹配
+	 * @param value
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public static final String prefixLike(final String value)
+	{
+		return "%" + likeQuery(value);
+	}
+	
+	/**
+	 * 
+	 * @description 后缀模糊匹配
+	 * @param value
+	 * @return
+	 * @author qianye.zheng
+	 */
+	public static final String suffixLike(final String value)
+	{
+		return likeQuery(value) + "%";
+	}
+	
 	/**
 	 * 
 	 * 描述: 组装值

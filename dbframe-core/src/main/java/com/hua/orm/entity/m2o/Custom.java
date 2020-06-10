@@ -10,7 +10,7 @@ package com.hua.orm.entity.m2o;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.hua.constant.ext.CustomStatus;
+import com.hua.constant.CustomStatus;
 import com.hua.entity.BaseEntity;
 
 /**

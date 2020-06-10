@@ -3,12 +3,24 @@ exception 解决方法
 1)
 
 
-2)
+2)java.lang.AbstractMethodError: com.mysql.jdbc.Connection.isValid(I)Z
+1) 场景: 使用mysql，由于mysql版本较高，其5.08的jar包无法支持，需要
+使用更高版本的jar例如mysql-5.1.8.jar 才能解决此异常
 
 3)
 
-4)
+4) 无法连接数据库异常
+com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:836) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:456) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:246) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:197) ~[mysql-connector-java-8.0.20.jar:8.0.20]
+	at java.sql.DriverManager.getConnection(DriverManager.java:664) ~[?:1.8.0_172]
+	at java.sql.DriverManager.getConnection(DriverManager.java:247) ~[?:1.8.0_172]
 5)
 
 6)

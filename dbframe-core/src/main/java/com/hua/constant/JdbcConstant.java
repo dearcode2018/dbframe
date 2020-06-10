@@ -41,4 +41,32 @@ public interface JdbcConstant {
 	
 	/* 连接参数 - 描述信息 */
 	String CONNECTION_DESCRIPTION = "description";
+	
+	/* table key */
+	String KEY_TABLE_CATALOG= "TABLE_CAT";
+	
+	/* table key */
+	String KEY_TABLE_SCHEMA  = "TABLE_SCHEM";
+	
+	/* table key */
+	String KEY_TABLE_NAME = "TABLE_NAME";
+	
+	/* table key */
+	String KEY_TABLE_TYPE = "TABLE_TYPE";
+	
+	/* table key */
+	String KEY_TABLE_REMARKS  = "TABLE_REMARKS";
+	
+	/*  */
+	String KEY_COLUMN_NAME = "COLUMN_NAME";
+	
+	/*  */
+	String KEY_DATA_TYPE = "DATA_TYPE";
+	
+	/*  */
+	String KEY_COLUMN_SIZE = "COLUMN_SIZE";
+	
+	/*  */
+	String KEY_DECIMAL_DIGITS = "DECIMAL_DIGITS";
+	
 }

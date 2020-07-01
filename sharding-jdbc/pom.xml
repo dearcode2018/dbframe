@@ -30,7 +30,7 @@
 		<mybatis.migrations.version>3.2.0</mybatis.migrations.version>		
 		<mybatis.spring.version>1.2.2</mybatis.spring.version>		
 		<sharding.jdbc.version>1.5.4.1</sharding.jdbc.version>
-		<mysql.driver.version>8.0.11</mysql.driver.version>
+		<mysql.driver.version>8.0.16</mysql.driver.version>
 		<groovy.version>3.0.0-alpha-3</groovy.version>
 		<commons.dbcp2.version>2.5.0</commons.dbcp2.version>
 	</properties>
